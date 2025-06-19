@@ -9,7 +9,7 @@ export class PokemonService {
   private readonly api = 'https://pokeapi.co/api/v2/pokemon';
 
   page = signal(0);
-  limit = 6;
+  limit = 8;
 
   pokemons = signal<any[]>([]);
   selectedPokemon = signal<any>(null);

@@ -16,7 +16,7 @@
   <ion-grid>
     <ion-row>
       @for (pokemon of pokemonService.pokemons(); track $index) {
-      <ion-col size="6">
+      <ion-col size="3">
         <app-pokemon-card
           [pokemon]="pokemon"
           (click)="goToDetails(pokemon)"

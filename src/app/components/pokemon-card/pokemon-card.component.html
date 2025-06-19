@@ -1,6 +1,18 @@
 <ion-card>
   <img [src]="imgUrl()" />
-  <ion-card-header>{{ pokemon().name }}</ion-card-header>
+  <ion-card-header>
+    <ion-card-subtitle>{{ `N°` + pokemon().id }}</ion-card-subtitle>
+    <ion-card-title
+      ><strong>{{ pokemon().name | titlecase }}</strong></ion-card-title
+    >
+  </ion-card-header>
+  <ion-card-content>
+    @for (types of pokemon().types; track $index) {
+    <ion-badge [color]="getColorByType(types.type.name)">{{
+      types?.type?.name | titlecase
+    }}</ion-badge>
+    }
+  </ion-card-content>
   <ion-button
     fill="clear"
     color="danger"
