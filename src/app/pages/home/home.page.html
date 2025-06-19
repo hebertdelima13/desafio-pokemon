@@ -1,17 +1,23 @@
 <ion-header>
-  <ion-searchbar placeholder="Search pokémon"></ion-searchbar>
+  <ion-searchbar
+    placeholder="Search pokémon"
+    [formControl]="searchControl"
+  ></ion-searchbar>
 </ion-header>
 
 <ion-content>
   <ion-grid>
     <ion-row>
-      @for (pokemon of pokemonService.pokemons(); track $index) {
-      <ion-col size-sm="6" size-xs="12" size-md="3" >
+      @if (pokemonService.pokemons().length > 0) { @for (pokemon of
+      pokemonService.pokemons(); track $index) {
+      <ion-col size-sm="6" size-xs="12" size-md="3">
         <app-pokemon-card
           [pokemon]="pokemon"
           (click)="goToDetails(pokemon)"
         ></app-pokemon-card>
       </ion-col>
+      } } @else {
+      <p>Nenhum pokémon para exibir!</p>
       }
     </ion-row>
   </ion-grid>

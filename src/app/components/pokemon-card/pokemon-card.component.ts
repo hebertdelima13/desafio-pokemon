@@ -116,8 +116,8 @@ export class PokemonCardComponent {
   }
 
   getColorByType(type: string): string {
-  return this.colorTypeList.find(t => t.type === type)?.color || 'medium';
-}
+    return this.colorTypeList.find((t) => t.type === type)?.color || 'medium';
+  }
 
   toggleFavorite(id: number) {
     console.log(this.pokemon());

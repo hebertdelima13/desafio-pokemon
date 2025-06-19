@@ -6,21 +6,17 @@
 
 <ion-content>
   @if (pokemon()) {
-    <h2>{{ pokemon()?.name | titlecase }}</h2>
-    <img [src]="pokemon().sprites.front_default" />
-    <ion-list [inset]="true">
-      @for ( stat of pokemon().stats; track $index) {
-        <ion-item>{{ stat.stat.name }}: {{ stat.base_stat }}</ion-item>
-      }
-      @for ( type of pokemon().types;track $index) {
-        <ion-item>Tipo: {{ type.type.name }}</ion-item>
-      }
-      @for ( ability of pokemon().abilities;track $index) {
-        <ion-item>Habilidade: {{ ability.ability.name }}</ion-item>
-      }
-    </ion-list>
-  } @else {
-    <p>Nenhum pokémon encontrado!</p>
+  <h2>{{ pokemon().name | titlecase }}</h2>
+  <img [src]="pokemon().sprites.front_default" />
+  <ion-list [inset]="true">
+    @for ( stat of pokemon().stats; track $index) {
+    <ion-item>{{ stat.stat.name }}: {{ stat.base_stat }}</ion-item>
+    } @for ( type of pokemon().types;track $index) {
+    <ion-item>Tipo: {{ type.type.name }}</ion-item>
+    } @for ( ability of pokemon().abilities;track $index) {
+    <ion-item>Habilidade: {{ ability.ability.name }}</ion-item>
+    }
+  </ion-list>
   }
   <ion-button expand="full" (click)="previousPage()">Voltar</ion-button>
 </ion-content>

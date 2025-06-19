@@ -67,4 +67,17 @@ export class PokemonService {
   }
 
   isFavorite = (id: number) => computed(() => this.favorites().has(id));
+
+  searchByName(name: string) {
+    const lowerName = name.toLowerCase().trim();
+    if (!lowerName) {
+      this.loadPokemons();
+      return;
+    }
+
+    this.http.get<any>(`${this.api}/${lowerName}`).subscribe({
+      next: (result) => this.pokemons.set([result]),
+      error: () => this.pokemons.set([]),
+    });
+  }
 }
