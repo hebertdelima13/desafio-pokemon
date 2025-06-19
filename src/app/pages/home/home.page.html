@@ -1,22 +1,12 @@
 <ion-header>
-  <div class="custom-searchbar">
-    <ion-searchbar
-      placeholder="Search your Pokèmon!"
-      mode="md"
-      showCancelButton="never"
-      class="search-input"
-    ></ion-searchbar>
-    <div class="search-icon">
-      <img src="assets/icon-pokeball.svg" class="pokeball-img" />
-    </div>
-  </div>
+  <ion-searchbar placeholder="Search pokémon"></ion-searchbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content>
   <ion-grid>
     <ion-row>
       @for (pokemon of pokemonService.pokemons(); track $index) {
-      <ion-col size="3">
+      <ion-col size-sm="6" size-xs="12" size-md="3" >
         <app-pokemon-card
           [pokemon]="pokemon"
           (click)="goToDetails(pokemon)"
