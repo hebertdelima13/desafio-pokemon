@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { DetailsComponent } from './details.component';
+import { DetailsComponent } from './details.page';
 
 describe('DetailsComponent', () => {
   let component: DetailsComponent;
