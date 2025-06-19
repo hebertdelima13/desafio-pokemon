@@ -12,6 +12,7 @@ export class PokemonService {
   limit = 6;
 
   pokemons = signal<any[]>([]);
+  selectedPokemon = signal<any>(null);
   favorites = signal<Set<number>>(new Set());
   http = inject(HttpClient);
 
@@ -44,6 +45,10 @@ export class PokemonService {
       this.page.update((p) => p - 1);
       this.loadPokemons();
     }
+  }
+
+  selectPokemon(pokemon: any) {
+    this.selectedPokemon.set(pokemon);
   }
 
   getPokemonDetails(name: string): Observable<any> {

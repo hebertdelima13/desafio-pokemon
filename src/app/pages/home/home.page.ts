@@ -15,6 +15,7 @@ export class HomePage {
   router = inject(Router);
 
   goToDetails(pokemon: any) {
+      this.pokemonService.selectPokemon(pokemon);
     this.router.navigate(['/details', pokemon.name]);
   }
 

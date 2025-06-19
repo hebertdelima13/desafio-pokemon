@@ -11,8 +11,8 @@ import { IonToolbar, IonTitle, IonList, IonHeader, IonContent, IonItem, IonButto
 })
 export class DetailsPage  {
 
-  pokemon: any = null;
   pokemonService = inject(PokemonService);
+  pokemon = this.pokemonService.selectedPokemon;
   router = inject(Router);  
   route = inject(ActivatedRoute);
 
@@ -20,7 +20,7 @@ export class DetailsPage  {
   ) {
     const name = this.route.snapshot.paramMap.get('name');
     if (name) {
-      this.pokemonService.getPokemonDetails(name).subscribe(data => this.pokemon = data);
+      this.pokemonService.getPokemonDetails(name).subscribe(data => this.pokemon.set(data));
     }
   }
 
