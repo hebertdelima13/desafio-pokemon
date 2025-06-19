@@ -1,7 +1,15 @@
 <ion-card>
   <img [src]="imgUrl()" />
   <ion-card-header>{{ pokemon().name }}</ion-card-header>
-  <ion-button fill="clear" color="danger" (click)="toggleFavorite(pokemonId())">
-    <ion-icon name="heart"></ion-icon>
+  <ion-button
+    fill="clear"
+    color="danger"
+    (click)="toggleFavorite(pokemonId()); $event.stopPropagation()"
+  >
+    <ion-icon
+      [name]="
+        pokemonService.isFavorite(pokemonId())() ? 'heart' : 'heart-outline'
+      "
+    ></ion-icon>
   </ion-button>
 </ion-card>

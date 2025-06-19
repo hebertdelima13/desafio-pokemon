@@ -17,23 +17,27 @@ export class PokemonService {
   http = inject(HttpClient);
 
   constructor() {
+    localStorage.getItem('favorites') &&
+      this.favorites.set(
+        new Set(JSON.parse(localStorage.getItem('favorites')!))
+      );
     this.loadPokemons();
   }
 
   loadPokemons() {
-  const offset = this.page() * this.limit;
+    const offset = this.page() * this.limit;
 
-  this.http
-    .get<any>(`${this.api}?offset=${offset}&limit=${this.limit}`)
-    .pipe(
-      map((res) => res.results),
-      switchMap((results: any[]) =>
-        forkJoin(results.map((p) => this.http.get<any>(p.url)))
-      ),
-      tap((detailed: any[]) => this.pokemons.set(detailed))
-    )
-    .subscribe();
-}
+    this.http
+      .get<any>(`${this.api}?offset=${offset}&limit=${this.limit}`)
+      .pipe(
+        map((res) => res.results),
+        switchMap((results: any[]) =>
+          forkJoin(results.map((p) => this.http.get<any>(p.url)))
+        ),
+        tap((detailed: any[]) => this.pokemons.set(detailed))
+      )
+      .subscribe();
+  }
 
   nextPage() {
     this.page.update((p) => p + 1);
@@ -59,6 +63,7 @@ export class PokemonService {
     const favs = new Set(this.favorites());
     favs.has(id) ? favs.delete(id) : favs.add(id);
     this.favorites.set(favs);
+    localStorage.setItem('favorites', JSON.stringify(Array.from(favs)));
   }
 
   isFavorite = (id: number) => computed(() => this.favorites().has(id));

@@ -1,5 +1,5 @@
-import { heart } from 'ionicons/icons';
-import { Component, signal, input, inject, computed } from '@angular/core';
+import { heart, heartOutline } from 'ionicons/icons';
+import { Component, input, inject, computed } from '@angular/core';
 import { PokemonService } from 'src/app/services/pokemon.service';
 import {
   IonCard,
@@ -23,7 +23,7 @@ export class PokemonCardComponent {
   imgUrl = computed(() => this.pokemon()?.sprites?.front_default ?? '');
 
   constructor() {
-    addIcons({ heart });
+    addIcons({ heart, 'heart-outline': heartOutline });
   }
 
   toggleFavorite(id: number) {
