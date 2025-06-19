@@ -10,12 +10,14 @@ import {
   IonItem,
   IonButton,
 } from '@ionic/angular/standalone';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.page.html',
   styleUrls: ['./details.page.scss'],
   imports: [
+    CommonModule,
     IonToolbar,
     IonTitle,
     IonList,
