@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { computed, Injectable, signal } from '@angular/core';
-import { map, Observable, tap } from 'rxjs';
+import { computed, inject, Injectable, signal } from '@angular/core';
+import { forkJoin, map, Observable, switchMap, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,25 +9,30 @@ export class PokemonService {
   private readonly api = 'https://pokeapi.co/api/v2/pokemon';
 
   page = signal(0);
-  limit = 20;
+  limit = 6;
 
   pokemons = signal<any[]>([]);
   favorites = signal<Set<number>>(new Set());
+  http = inject(HttpClient);
 
-  constructor(private http: HttpClient) {
+  constructor() {
     this.loadPokemons();
   }
 
   loadPokemons() {
-    const offset = this.page() * this.limit;
-    this.http
-      .get<any>(`${this.api}?offset=${offset}&limit=${this.limit}`)
-      .pipe(
-        map((res) => res.results),
-        tap((list) => this.pokemons.set(list))
-      )
-      .subscribe();
-  }
+  const offset = this.page() * this.limit;
+
+  this.http
+    .get<any>(`${this.api}?offset=${offset}&limit=${this.limit}`)
+    .pipe(
+      map((res) => res.results),
+      switchMap((results: any[]) =>
+        forkJoin(results.map((p) => this.http.get<any>(p.url)))
+      ),
+      tap((detailed: any[]) => this.pokemons.set(detailed))
+    )
+    .subscribe();
+}
 
   nextPage() {
     this.page.update((p) => p + 1);

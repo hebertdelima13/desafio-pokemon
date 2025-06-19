@@ -1,16 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonSearchbar, IonHeader, IonContent, IonCol, IonGrid, IonRow, IonButton } from '@ionic/angular/standalone';
+import { PokemonCardComponent } from 'src/app/components/pokemon-card/pokemon-card.component';
 import { PokemonService } from 'src/app/services/pokemon.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonSearchbar, IonHeader, IonContent, IonCol, IonGrid, IonRow, IonButton],
+  imports: [IonSearchbar, IonHeader, IonContent, IonCol, IonGrid, IonRow, IonButton, PokemonCardComponent],
 })
 export class HomePage {
-  constructor(public pokemonService: PokemonService, private router: Router) {}
+  pokemonService = inject(PokemonService);
+  router = inject(Router);
 
   goToDetails(pokemon: any) {
     this.router.navigate(['/details', pokemon.name]);

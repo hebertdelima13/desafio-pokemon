@@ -14,9 +14,14 @@
 
 <ion-content class="ion-padding">
   <ion-grid>
-    <ion-row>
-      <ion-col size="6" *ngFor="let pokemon of pokemonService.pokemons()">
+    <ion-row>      
+        @for (pokemon of pokemonService.pokemons(); track $index) {
+
+      <ion-col size="6" >
+        <app-pokemon-card [pokemon]="pokemon" (click)="goToDetails(pokemon)"></app-pokemon-card>
       </ion-col>
+      }
+
     </ion-row>
   </ion-grid>
   <ion-button expand="full" (click)="previousPage()">Anterior</ion-button>
