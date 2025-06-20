@@ -6,7 +6,7 @@ https://desafio-pokemon-sigma.vercel.app/home
 
 ## Demonstração da Usabilidade
 
-![Animação](./public/videogif.gif)
+![Animação](./public/pokemon.gif)
 
 ### ToDo List
 
